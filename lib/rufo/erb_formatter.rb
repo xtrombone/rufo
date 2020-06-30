@@ -8,7 +8,7 @@ class CustomScanner < ERB::Compiler::TrimScanner
   end
 
   def stags
-    ["<%==", "<%+={0,2}"] + super
+    ["<%==", "<%#+?", "<%+={0,2}"] + super
   end
 
   def etags
@@ -72,6 +72,7 @@ class Rufo::ErbFormatter
   def process_erb
     code = []
     scanner.scan do |token|
+      puts token.inspect
       if token.is_a?(String) && token.end_with?("%>")
         disable_code_mode
         yield [:code, code.join("")]

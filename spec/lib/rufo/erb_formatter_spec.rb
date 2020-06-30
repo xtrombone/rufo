@@ -63,5 +63,10 @@ RSpec.describe Rufo::ErbFormatter do
         expect(error.lineno).to eql(3)
       }
     end
+
+    it "handles comments" do
+      result = subject.format("<%#comment %>")
+      expect(result).to eql("<%# comment %>")
+    end
   end
 end
